@@ -96,6 +96,8 @@
     /* ─── Tel-Links auf Desktop deaktivieren ── */
     @media (min-width: 769px) {
       a[href^="tel"] { cursor: default; }
+      .tel-display { transition: color 250ms ease; cursor: default; }
+      .tel-display:hover { color: var(--gold) !important; }
     }
 
     /* ─── Buttons ─────────────────────────── */
@@ -1116,8 +1118,7 @@
     if (window.innerWidth >= 769) {
       document.querySelectorAll('a[href^="tel"]').forEach(link => {
         const span = document.createElement('span')
-        span.className = link.className
-        span.setAttribute('style', link.getAttribute('style') || '')
+        span.className = link.className + ' tel-display'
         span.innerHTML = link.innerHTML
         link.parentNode.replaceChild(span, link)
       })
