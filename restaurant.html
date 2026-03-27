@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zum Goldenen Stein – Wirtshaus · Mülheim an der Ruhr</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-base:      #0b0a08;
+      --bg-surface:   #0b0a08;
+      --bg-elevated:  #0b0a08;
+      --gold:         #c9a040;
+      --gold-light:   #c9a040;
+      --gold-dim:     #c9a040;
+      --amber:        #c9a040;
+      --text-primary: #ffffff;
+      --text-secondary: #ffffff;
+      --text-muted:   #ffffff;
+      --border:       rgba(201, 160, 64, 0.15);
+      --border-hover: rgba(201, 160, 64, 0.4);
+
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans:  'Inter', system-ui, sans-serif;
+
+      --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px;
+      --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
+      --space-9:96px; --space-10:128px;
+
+      --radius-sm:4px; --radius-md:8px; --radius-lg:16px; --radius-xl:24px;
+      --shadow-gold: 0 0 40px rgba(201, 160, 64, 0.1);
+      --transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--gold) var(--bg-base);
+    }
+
+    body {
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+    ul { list-style: none; }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin-inline: auto;
+      padding-inline: var(--space-6);
+    }
+    @media (max-width: 768px) { .container { padding-inline: var(--space-4); } }
+
+    .section { padding-block: var(--space-10); }
+    @media (max-width: 768px) { .section { padding-block: var(--space-8); } }
+
+    .label {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: var(--font-sans);
+    }
+
+    .display {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .heading-xl {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      font-weight: 600;
+      line-height: 1.15;
+    }
+
+    /* ─── Buttons ─────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--space-2);
+      padding: 14px 32px; border-radius: var(--radius-sm);
+      font-size: 0.875rem; font-weight: 500; letter-spacing: 0.05em;
+      transition: var(--transition);
+    }
+    .btn-primary { background: var(--gold); color: #0b0a08; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(201,160,64,0.3); }
+    .btn-primary:active { transform: none; }
+    .btn-outline { background: transparent; color: var(--gold); border: 1px solid var(--gold-dim); }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(201,160,64,0.06); transform: translateY(-1px); }
+    .btn-ghost { background: transparent; color: #ffffff; padding-inline: var(--space-4); }
+    .btn-ghost:hover { color: var(--gold); }
+
+    /* ─── Navigation ──────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding-block: var(--space-5);
+      transition: background var(--transition), padding var(--transition);
+    }
+    .nav.scrolled {
+      background: rgba(11,10,8,0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding-block: var(--space-4);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-6); }
+
+    .nav__logo { display: flex; flex-direction: column; line-height: 1; }
+    .nav__logo-name { font-family: var(--font-serif); font-size: 1.375rem; font-weight: 700; color: var(--gold); }
+    .nav__logo-tagline { font-size: 0.625rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: #ffffff; margin-top: 3px; }
+
+    .nav__links { display: flex; align-items: center; gap: var(--space-2); }
+    @media (max-width: 768px) { .nav__links { display: none; } }
+
+    .nav__link {
+      font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.06em;
+      color: #ffffff; padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm); transition: color var(--transition);
+      position: relative;
+    }
+    .nav__link::after {
+      content: ''; position: absolute; bottom: 4px; left: var(--space-4); right: var(--space-4);
+      height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: left;
+      transition: transform var(--transition);
+    }
+    .nav__link:hover { color: var(--gold); }
+    .nav__link:hover::after { transform: scaleX(1); }
+
+    .nav__actions { display: flex; align-items: center; gap: var(--space-3); }
+
+    /* ─── Hamburger Button ─────────────────── */
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px; height: 40px;
+      padding: 8px;
+      border-radius: var(--radius-sm);
+      transition: background var(--transition);
+      z-index: 200;
+    }
+    .nav__hamburger:hover { background: rgba(201,160,64,0.08); }
+    @media (max-width: 768px) { .nav__hamburger { display: flex; } }
+
+    .nav__hamburger-line {
+      width: 22px; height: 1.5px;
+      background: #ffffff;
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition), width var(--transition);
+      transform-origin: center;
+    }
+    .nav__hamburger.open .nav__hamburger-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav__hamburger.open .nav__hamburger-line:nth-child(2) { opacity: 0; width: 0; }
+    .nav__hamburger.open .nav__hamburger-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* ─── Mobile Drawer ────────────────────── */
+    .nav__drawer {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 150;
+      pointer-events: none;
+    }
+    @media (max-width: 768px) { .nav__drawer { display: block; } }
+
+    .nav__drawer-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(11,10,8,0.7);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      transition: opacity 350ms ease;
+    }
+    .nav__drawer-panel {
+      position: absolute;
+      top: 0; right: 0;
+      width: min(300px, 85vw); height: 100%;
+      background: #111009;
+      border-left: 1px solid var(--border);
+      transform: translateX(100%);
+      transition: transform 350ms cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex; flex-direction: column;
+      padding: var(--space-8) var(--space-6) var(--space-7);
+    }
+    .nav__drawer.open {
+      pointer-events: all;
+    }
+    .nav__drawer.open .nav__drawer-backdrop { opacity: 1; }
+    .nav__drawer.open .nav__drawer-panel { transform: translateX(0); }
+
+    .nav__drawer-logo {
+      font-family: var(--font-serif);
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--gold);
+      margin-bottom: var(--space-8);
+    }
+    .nav__drawer-links {
+      display: flex; flex-direction: column; gap: var(--space-2);
+      flex: 1;
+    }
+    .nav__drawer-link {
+      font-size: 1.125rem; font-weight: 500;
+      color: #ffffff;
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      letter-spacing: 0.02em;
+      transition: background var(--transition), color var(--transition);
+      display: flex; align-items: center; gap: var(--space-3);
+    }
+    .nav__drawer-link:hover { background: rgba(201,160,64,0.08); color: var(--gold); }
+    .nav__drawer-link-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold); opacity: 0.6; flex-shrink: 0;
+    }
+    .nav__drawer-divider {
+      height: 1px; background: var(--border); margin-block: var(--space-5);
+    }
+    .nav__drawer-cta {
+      display: flex; flex-direction: column; gap: var(--space-3);
+    }
+
+    /* ─── Hero ────────────────────────────── */
+    .hero {
+      position: relative; min-height: 100svh;
+      display: flex; align-items: center; overflow: hidden;
+    }
+
+    .hero__bg {
+      position: absolute; inset: 0;
+      background-color: var(--bg-base);
+    }
+    .hero__bg-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      opacity: 0.45;
+      transition: opacity 0.6s ease;
+    }
+    .hero__bg::after {
+      content: ''; position: absolute; inset: 0;
+      background:
+        linear-gradient(to right, rgba(11,10,8,0.95) 0%, rgba(11,10,8,0.7) 55%, rgba(11,10,8,0.35) 100%),
+        linear-gradient(to top, rgba(11,10,8,0.9) 0%, transparent 40%);
+      z-index: 1;
+    }
+
+    /* Decorative stone/crest element */
+    .hero__crest {
+      position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
+      width: min(380px, 42vw);
+      display: flex; align-items: center; justify-content: center;
+    }
+    @media (max-width: 900px) { .hero__crest { opacity: 0.08; width: 80vw; right: 50%; transform: translate(50%, -50%); } }
+
+    .crest-ring {
+      width: 100%; aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(201,160,64,0.12);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .crest-ring::before {
+      content: ''; position: absolute; inset: 16px;
+      border-radius: 50%; border: 1px solid rgba(201,160,64,0.08);
+    }
+    .crest-inner {
+      width: 55%; aspect-ratio: 1; border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, rgba(201,160,64,0.08) 0%, transparent 70%);
+      border: 1px solid rgba(201,160,64,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: clamp(3.5rem, 6vw, 5rem);
+      filter: drop-shadow(0 4px 24px rgba(201,160,64,0.2));
+    }
+
+    .hero__content { position: relative; z-index: 2; padding-top: 100px; padding-bottom: var(--space-9); width: 100%; }
+    .hero__inner { max-width: 900px; }
+
+    .hero__eyebrow { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-6); animation: fadeInUp 0.8s 0.2s ease both; }
+    .hero__eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+
+    .hero__title { margin-bottom: var(--space-6); animation: fadeInUp 0.8s 0.4s ease both; white-space: nowrap; }
+    .hero__title em { font-style: italic; color: var(--gold-light); }
+
+    .hero__subtitle {
+      font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--text-secondary);
+      line-height: 1.75; margin-bottom: var(--space-7); max-width: 580px;
+      animation: fadeInUp 0.8s 0.6s ease both;
+    }
+
+    .hero__cta { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; animation: fadeInUp 0.8s 0.8s ease both; }
+
+    .hero__info-strip {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: #1c190f; backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      z-index: 2;
+    }
+    .hero__info-inner {
+      display: flex; align-items: stretch;
+      divide-x: 1px solid var(--border);
+    }
+    .hero__info-item {
+      flex: 1; padding: var(--space-4) var(--space-5);
+      display: flex; align-items: flex-start; gap: var(--space-3);
+      border-right: 1px solid var(--border);
+    }
+    .hero__info-item:last-child { border-right: none; }
+    @media (max-width: 640px) {
+      .hero__info-inner { flex-direction: column; }
+      .hero__info-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .hero__info-item:last-child { border-bottom: none; }
+    }
+    .hero__info-icon { font-size: 1.125rem; flex-shrink: 0; }
+    .hero__info-text { font-size: 0.8125rem; color: #ffffff; line-height: 1.4; }
+    .hero__info-text strong { display: block; color: var(--gold); font-weight: 500; }
+
+    /* ─── Über uns ────────────────────────── */
+    .about__grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--space-9); align-items: stretch;
+    }
+    @media (max-width: 900px) { .about__grid { grid-template-columns: 1fr; gap: var(--space-7); } }
+
+    .about__label { margin-bottom: var(--space-4); }
+    .about__heading { margin-bottom: var(--space-5); }
+    .about__text { color: var(--text-secondary); line-height: 1.85; margin-bottom: var(--space-4); font-size: 1.0625rem; }
+
+    .about__badges { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
+    .about__badge {
+      display: flex; align-items: center; gap: var(--space-2);
+      padding: 8px 16px; border-radius: 100px;
+      border: 1px solid var(--border); background: var(--bg-elevated);
+      font-size: 0.8125rem; color: var(--text-secondary);
+    }
+    .about__badge-icon { font-size: 1rem; }
+
+    .about__visual { position: relative; display: flex; flex-direction: column; padding-right: var(--space-6); }
+    .about__card {
+      border-radius: var(--radius-lg); overflow: hidden;
+      flex: 1; min-height: 400px; background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .about__card-photo {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+
+    .about__accent-img {
+      width: 100%; border-radius: var(--radius-lg);
+      aspect-ratio: 16/9; object-fit: cover; object-position: center;
+      margin-top: var(--space-5);
+      border: 1px solid var(--border);
+      display: block;
+    }
+    .about__card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,10,8,0.85) 0%, rgba(11,10,8,0.2) 60%, transparent 100%);
+      z-index: 1;
+    }
+    .about__card-content {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      padding: var(--space-6); text-align: left;
+    }
+    .about__card-quote {
+      font-family: var(--font-serif); font-style: italic;
+      color: var(--text-primary); font-size: 1rem; line-height: 1.7;
+      margin-bottom: var(--space-2);
+    }
+    .about__card-attr { font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .about__float-badge {
+      position: absolute; bottom: -20px; right: -20px;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: var(--space-4) var(--space-5);
+      display: flex; align-items: center; gap: var(--space-3);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+    }
+    @media (max-width: 480px) { .about__float-badge { right: 0; bottom: calc(-1 * var(--space-4)); } }
+    .float-badge-icon { font-size: 1.5rem; }
+    .float-badge-text { font-size: 0.8125rem; font-weight: 500; color: var(--text-primary); }
+    .float-badge-sub { font-size: 0.6875rem; color: var(--text-muted); }
+
+    /* ─── Speisekarte ─────────────────────── */
+    .menu { background: var(--bg-base); }
+    .menu__header { text-align: center; margin-bottom: var(--space-6); }
+    .menu__heading { margin-bottom: var(--space-4); }
+    .menu__subtext { color: var(--text-secondary); max-width: 480px; margin-inline: auto; }
+
+    .menu__tabs {
+      display: flex; justify-content: center; gap: var(--space-2);
+      margin-bottom: var(--space-8); flex-wrap: wrap;
+    }
+    .menu__tab {
+      padding: 10px 24px; border-radius: 100px; font-size: 0.875rem;
+      font-weight: 500; color: var(--text-secondary); background: transparent;
+      border: 1px solid var(--border); transition: var(--transition); letter-spacing: 0.03em;
+    }
+    .menu__tab:hover { color: #ffffff; border-color: var(--border-hover); }
+    .menu__tab.active { background: var(--gold); color: #0b0a08; border-color: var(--gold); }
+
+    .menu__grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5);
+    }
+    @media (max-width: 900px) { .menu__grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 580px) { .menu__grid { grid-template-columns: 1fr; } }
+
+    .dish-card {
+      background: #1c190f; border-radius: var(--radius-lg);
+      overflow: hidden; border: 1px solid var(--border);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .dish-card:hover { transform: translateY(-4px); border-color: var(--border-hover); box-shadow: 0 20px 60px rgba(0,0,0,0.4), var(--shadow-gold); }
+
+    .dish-card__image { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+    .dish-card__photo {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      transition: transform 400ms ease;
+      background: var(--bg-elevated);
+    }
+    .dish-card:hover .dish-card__photo { transform: scale(1.04); }
+    .dish-card__img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(11,10,8,0.5) 0%, transparent 60%);
+      z-index: 1;
+    }
+    .dish-card__badge {
+      position: absolute; top: var(--space-3); right: var(--space-3);
+      background: rgba(11,10,8,0.85); backdrop-filter: blur(8px);
+      border: 1px solid var(--border); border-radius: 100px;
+      padding: 4px 10px; font-size: 0.6875rem; font-weight: 600;
+      letter-spacing: 0.08em; color: var(--gold); text-transform: uppercase;
+    }
+    .dish-card__body { padding: var(--space-5); }
+    .dish-card__name { font-family: var(--font-serif); font-size: 1.0625rem; font-weight: 600; margin-bottom: var(--space-2); }
+    .dish-card__desc { font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: var(--space-4); }
+    .dish-card__footer { display: flex; align-items: center; justify-content: space-between; }
+    .dish-card__price { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; color: var(--gold); }
+    .dish-card__tag { font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.08em; color: #ffffff; text-transform: uppercase; }
+    .menu__cta { text-align: center; margin-top: var(--space-8); }
+
+    /* ─── Features ────────────────────────── */
+    .features__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); }
+    @media (max-width: 760px) { .features__grid { grid-template-columns: 1fr; } }
+    .features__header { text-align: center; margin-bottom: var(--space-9); }
+
+    .feat-card {
+      padding: var(--space-7) var(--space-6); border-radius: var(--radius-lg);
+      border: 1px solid var(--border); background: var(--bg-base);
+      position: relative; overflow: hidden;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .feat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0; transition: opacity var(--transition);
+    }
+    .feat-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+    .feat-card:hover::before { opacity: 1; }
+    .feat-card__icon { font-size: 2.5rem; margin-bottom: var(--space-5); }
+    .feat-card__title { font-family: var(--font-serif); font-size: 1.25rem; font-weight: 600; margin-bottom: var(--space-3); }
+    .feat-card__text { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; }
+
+    /* ─── Öffnungszeiten ──────────────────── */
+    .hours { background: var(--bg-base); border-top: 1px solid var(--border); }
+    .hours__inner { max-width: 800px; margin-inline: auto; }
+    .hours__header { text-align: center; margin-bottom: var(--space-6); }
+
+    .hours__grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5);
+    }
+    @media (max-width: 640px) { .hours__grid { grid-template-columns: 1fr; } }
+
+    .hours__card {
+      background: #1c190f; border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .hours__card-header {
+      background: #1c190f; border-bottom: 1px solid var(--border);
+      padding: var(--space-4) var(--space-5);
+      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .hours__row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: var(--space-3) var(--space-5); border-bottom: 1px solid var(--border);
+    }
+    .hours__row:last-child { border-bottom: none; }
+    .hours__day { font-size: 0.9rem; color: #ffffff; }
+    .hours__time { font-size: 0.875rem; font-weight: 500; color: #ffffff; }
+    .hours__closed { color: #ffffff; font-size: 0.875rem; }
+
+    .hours__contact {
+      margin-top: var(--space-6); background: #1c190f;
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: var(--space-6); display: grid;
+      grid-template-columns: repeat(3, 1fr); gap: var(--space-5);
+      text-align: center;
+    }
+    @media (max-width: 580px) { .hours__contact { grid-template-columns: 1fr; } }
+    .contact-item__icon { font-size: 1.5rem; margin-bottom: var(--space-2); }
+    .contact-item__label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-1); }
+    .contact-item__value { font-size: 0.9375rem; color: var(--text-primary); }
+    .contact-item__value a { color: var(--gold); transition: color var(--transition); }
+    .contact-item__value a:hover { color: var(--gold-light); }
+
+    /* ─── Tisch reservieren ───────────────── */
+    .reservation { position: relative; overflow: hidden; }
+    .reservation::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,160,64,0.04) 0%, transparent 70%);
+    }
+    .reservation__inner { position: relative; max-width: 680px; margin-inline: auto; text-align: center; }
+    .reservation__heading { margin-bottom: var(--space-5); }
+    .reservation__subtext { color: var(--text-secondary); margin-bottom: var(--space-8); font-size: 1.0625rem; line-height: 1.75; }
+
+    .reservation__form {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: var(--space-7); text-align: left;
+    }
+    @media (max-width: 580px) { .reservation__form { padding: var(--space-5); } }
+
+    .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+    @media (max-width: 580px) { .form__row { grid-template-columns: 1fr; } }
+    .form__group { margin-bottom: var(--space-4); }
+    .form__label { display: block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--space-2); }
+
+    .form__input, .form__select {
+      width: 100%; background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 14px var(--space-4);
+      color: var(--text-primary); font-family: var(--font-sans); font-size: 0.9375rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none; appearance: none; -webkit-appearance: none;
+    }
+    .form__input::placeholder { color: var(--text-muted); }
+    .form__input:focus, .form__select:focus { border-color: var(--gold-dim); box-shadow: 0 0 0 3px rgba(201,160,64,0.1); }
+    .form__select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a040' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px;
+    }
+    .form__select option { background: var(--bg-elevated); }
+    .form__submit { width: 100%; margin-top: var(--space-2); padding-block: 16px; font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.06em; }
+
+    /* ─── Footer ──────────────────────────── */
+    .footer { border-top: 1px solid var(--border); padding-block: var(--space-9) var(--space-7); }
+    .footer__top { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: var(--space-6); margin-bottom: var(--space-8); }
+    @media (max-width: 900px) { .footer__top { grid-template-columns: 1fr 1fr; gap: var(--space-6); } }
+    @media (max-width: 480px) { .footer__top { grid-template-columns: 1fr; } }
+
+    .footer__hours-row { display: flex; justify-content: flex-start; gap: var(--space-3); align-items: baseline; padding-block: 3px; font-size: 0.8125rem; color: #ffffff; }
+    .footer__hours-row span:last-child { white-space: nowrap; }
+    .footer__hours-row span:first-child { color: #ffffff; }
+    .footer__hours-closed { color: rgba(255,255,255,0.5) !important; }
+
+    .footer__brand-name { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; margin-bottom: 3px; color: var(--gold); white-space: nowrap; }
+    .footer__brand-desc { font-size: 0.875rem; color: #ffffff; line-height: 1.75; margin-bottom: var(--space-5); white-space: nowrap; }
+    .footer__socials { display: flex; gap: var(--space-3); }
+    .footer__social-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(201,160,64,0.12); color: #ffffff;
+      transition: var(--transition); border: none;
+    }
+    .footer__social-btn:hover {
+      background: rgba(201,160,64,0.25);
+      transform: translateY(-2px);
+    }
+
+    .footer__col-title { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #ffffff; margin-bottom: var(--space-4); }
+    .footer__links { display: flex; flex-direction: column; gap: var(--space-3); }
+    .footer__link { font-size: 0.875rem; color: #ffffff; transition: color var(--transition); }
+    .footer__link:hover { color: var(--gold); }
+
+    .footer__bottom {
+      padding-top: var(--space-6); border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: var(--space-3);
+    }
+    .footer__copy { font-size: 0.8125rem; color: #ffffff; }
+    .footer__legal { display: flex; gap: var(--space-5); }
+    .footer__legal a { font-size: 0.8125rem; color: #ffffff; transition: color var(--transition); }
+    .footer__legal a:hover { color: var(--gold); }
+
+    /* ─── Bildergalerie ──────────────────── */
+    .gallery { padding-block: 0; overflow: hidden; }
+    .gallery__strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 280px;
+      gap: 0;
+    }
+    @media (max-width: 900px) {
+      .gallery__strip { grid-template-columns: 1fr 1fr; grid-template-rows: 200px 200px; }
+    }
+    @media (max-width: 580px) {
+      .gallery__strip { grid-template-columns: 1fr 1fr; grid-template-rows: 160px 160px; }
+    }
+    .gallery__item {
+      position: relative; overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery__item img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      background: var(--bg-elevated);
+    }
+    .gallery__item-overlay {
+      position: absolute; inset: 0;
+    }
+
+    /* ─── Animations ──────────────────────── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up-delay-1 { transition-delay: 0.1s; }
+    .fade-up-delay-2 { transition-delay: 0.2s; }
+    .fade-up-delay-3 { transition-delay: 0.3s; }
+    .fade-up-delay-4 { transition-delay: 0.4s; }
+
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: var(--radius-sm); }
+    ::selection { background: rgba(201,160,64,0.2); color: #ffffff; }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Hauptnavigation">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="#" class="nav__logo" aria-label="Zum Goldenen Stein – Startseite">
+          <span class="nav__logo-name">Zum Goldenen Stein</span>
+          <span class="nav__logo-tagline">Wirtshaus · Mülheim an der Ruhr</span>
+        </a>
+
+        <ul class="nav__links" role="list">
+          <li><a href="#about" class="nav__link">Über uns</a></li>
+          <li><a href="#speisekarte" class="nav__link">Speisekarte</a></li>
+          <li><a href="#oeffnungszeiten" class="nav__link">Öffnungszeiten</a></li>
+        </ul>
+
+        <div class="nav__actions">
+          <a href="tel:+4915145031359" class="btn btn-ghost" aria-label="Anrufen">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.77a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            +49 1514 5031359
+          </a>
+          <button class="nav__hamburger" id="nav-hamburger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-drawer">
+            <span class="nav__hamburger-line"></span>
+            <span class="nav__hamburger-line"></span>
+            <span class="nav__hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Drawer -->
+  <div class="nav__drawer" id="nav-drawer" role="dialog" aria-modal="true" aria-label="Navigation">
+    <div class="nav__drawer-backdrop" id="nav-drawer-backdrop"></div>
+    <div class="nav__drawer-panel">
+      <div class="nav__drawer-logo">Zum Goldenen Stein</div>
+      <nav class="nav__drawer-links" aria-label="Mobile Navigation">
+        <a href="#about" class="nav__drawer-link">
+          <span class="nav__drawer-link-dot"></span>Über uns
+        </a>
+        <a href="#speisekarte" class="nav__drawer-link">
+          <span class="nav__drawer-link-dot"></span>Speisekarte
+        </a>
+        <a href="#oeffnungszeiten" class="nav__drawer-link">
+          <span class="nav__drawer-link-dot"></span>Öffnungszeiten
+        </a>
+      </nav>
+      <div class="nav__drawer-divider"></div>
+      <div class="nav__drawer-cta">
+        <a href="tel:+4915145031359" class="btn btn-outline" style="justify-content:center;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.77a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Anrufen
+        </a>
+        <a href="#reservierung" class="btn btn-primary" style="justify-content:center;">Tisch reservieren</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__bg">
+      <img class="hero__bg-img"
+        src="images/Bild2.JPG"
+        alt=""
+        aria-hidden="true"
+        onerror="this.style.display='none'"
+      />
+    </div>
+
+    <div class="hero__crest" aria-hidden="true">
+      <div class="crest-ring">
+        <div class="crest-inner"></div>
+      </div>
+    </div>
+
+    <div class="hero__content">
+      <div class="container">
+        <div class="hero__inner">
+          <h1 class="display hero__title" id="hero-title">
+            <span style="color: var(--gold);">Zum Goldenen Stein</span>
+          </h1>
+
+          <p class="hero__subtitle">
+            Willkommen im Zum Goldenen Stein — einem Ort, wo gute Küche, herzliche Gastfreundschaft
+            und unvergessliche Momente zusammenkommen. Ob gemütlicher Stammtisch, ein Abend mit
+            der Familie oder ein besonderer Anlass: Hier fühlt sich jeder wie zu Hause.
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__info-strip">
+      <div class="container">
+        <div class="hero__info-inner">
+          <div class="hero__info-item">
+            <div class="hero__info-text">
+              <strong>Anfahrt</strong>
+              Wertgasse 38, 45468 Mülheim an der Ruhr
+            </div>
+          </div>
+          <div class="hero__info-item">
+            <div class="hero__info-text">
+              <strong>Öffnungszeiten</strong>
+              Di–Do 14:00–23:00 · Fr–Sa 14:00–23:45<br>So 13:00–22:30
+            </div>
+          </div>
+          <div class="hero__info-item">
+            <div class="hero__info-text">
+              <strong>Reservierung</strong>
+              <a href="tel:+4915145031359" style="color:#ffffff;">+49 1514 5031359</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Über uns -->
+  <section class="section" id="about" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about__grid">
+        <div>
+          <h2 class="heading-xl about__heading fade-up fade-up-delay-1" id="about-heading">
+            Tradition trifft<br>herzliche Gastlichkeit
+          </h2>
+          <p class="about__text fade-up fade-up-delay-2">
+            Das Wirtshaus Zum Goldenen Stein ist mehr als ein Restaurant — es ist ein Stück
+            Mülheimer Geschichte. Unser denkmalgeschütztes Haus lädt ein zum Verweilen,
+            Genießen und Wiederkommen.
+          </p>
+          <p class="about__text fade-up fade-up-delay-3">
+            Ob ein Glas kühles Bier nach Feierabend, ein herzhaftes Schnitzel mit Familie
+            oder ein geselliger Abend mit Freunden — bei uns fühlt sich jeder Gast willkommen.
+            Frisch, authentisch und mit Liebe zubereitet.
+          </p>
+
+        </div>
+
+        <div class="about__visual fade-up fade-up-delay-2">
+          <div class="about__card" aria-hidden="true">
+            <img class="about__card-photo"
+              src="images/Bild1.JPG"
+              alt="Unser Haus"
+              style="object-position: center center;"
+            />
+            <div class="about__card-overlay"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr style="border: none; border-top: 1px solid rgba(201,160,64,0.35); margin: 0;" />
+
+  <!-- Bildergalerie -->
+  <section class="gallery" aria-label="Impressionen">
+    <div class="gallery__strip">
+      <div class="gallery__item">
+        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&fit=crop&q=80" alt="Brotzeit" loading="lazy" onerror="this.style.opacity='0.1'" />
+        <div class="gallery__item-overlay"></div>
+      </div>
+      <div class="gallery__item">
+        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&fit=crop&q=80" alt="Grillhähnchen" loading="lazy" onerror="this.style.opacity='0.1'" />
+        <div class="gallery__item-overlay"></div>
+      </div>
+      <div class="gallery__item">
+        <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&fit=crop&q=80" alt="Forelle Blau" loading="lazy" onerror="this.style.opacity='0.1'" />
+        <div class="gallery__item-overlay"></div>
+      </div>
+      <div class="gallery__item">
+        <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800&fit=crop&q=80" alt="Gebratenes Hähnchen" loading="lazy" onerror="this.style.opacity='0.1'" />
+        <div class="gallery__item-overlay"></div>
+      </div>
+    </div>
+  </section>
+
+  <hr style="border: none; border-top: 1px solid rgba(201,160,64,0.35); margin: 0;" />
+
+  <!-- Speisekarte -->
+  <section class="section menu" id="speisekarte" aria-labelledby="menu-heading">
+    <div class="container">
+      <div class="menu__header">
+        <div class="label menu__label fade-up">Unsere Küche</div>
+        <h2 class="heading-xl menu__heading fade-up fade-up-delay-1" id="menu-heading">Speisekarte</h2>
+      </div>
+
+      <div class="menu__tabs fade-up" role="tablist" aria-label="Speisekartenauswahl">
+        <button class="menu__tab active" role="tab" aria-selected="true" data-filter="all">Beliebt</button>
+        <button class="menu__tab" role="tab" aria-selected="false" data-filter="vorspeisen">Vorspeisen</button>
+        <button class="menu__tab" role="tab" aria-selected="false" data-filter="hauptspeisen">Hauptspeisen</button>
+        <button class="menu__tab" role="tab" aria-selected="false" data-filter="getraenke">Getränke</button>
+      </div>
+
+      <div class="menu__grid" id="menu-grid">
+        <article class="dish-card fade-up" data-category="vorspeisen">
+          <div class="dish-card__image">
+            <img class="dish-card__photo" src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=600&h=450&fit=crop&q=80" alt="Hausgemachte Suppe" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1547592180-85f173990554?w=600&h=450&fit=crop&q=80'" />
+            <div class="dish-card__img-overlay"></div>
+          </div>
+          <div class="dish-card__body">
+            <h3 class="dish-card__name">Hausgemachte Suppe</h3>
+            <p class="dish-card__desc">Täglich frisch gekocht — je nach Saison und Verfügbarkeit</p>
+            <div class="dish-card__footer">
+              <span class="dish-card__price">ab 5,90 €</span>
+              <span class="dish-card__tag">Vorspeise</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card fade-up fade-up-delay-1" data-category="hauptspeisen">
+          <div class="dish-card__image">
+            <img class="dish-card__photo" src="schnitzel.jpg" alt="Wiener Schnitzel" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=600&h=450&fit=crop&q=80'" />
+            <div class="dish-card__img-overlay"></div>
+          </div>
+          <div class="dish-card__body">
+            <h3 class="dish-card__name">Wiener Schnitzel</h3>
+            <p class="dish-card__desc">Vom Kalb, goldbraun ausgebacken, mit Kartoffelsalat und Zitrone</p>
+            <div class="dish-card__footer">
+              <span class="dish-card__price">ab 14,90 €</span>
+              <span class="dish-card__tag">Hauptspeise</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card fade-up fade-up-delay-2" data-category="hauptspeisen">
+          <div class="dish-card__image">
+            <img class="dish-card__photo" src="sauerbraten.jpg" alt="Sauerbraten" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1574484284002-952d92456975?w=600&h=450&fit=crop&q=80'" />
+            <div class="dish-card__img-overlay"></div>
+          </div>
+          <div class="dish-card__body">
+            <h3 class="dish-card__name">Sauerbraten</h3>
+            <p class="dish-card__desc">Rheinischer Sauerbraten mit Rotkohl und Kartoffelklößen</p>
+            <div class="dish-card__footer">
+              <span class="dish-card__price">ab 13,90 €</span>
+              <span class="dish-card__tag">Hauptspeise</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card fade-up fade-up-delay-3" data-category="hauptspeisen">
+          <div class="dish-card__image">
+            <img class="dish-card__photo" src="https://images.unsplash.com/photo-1558030006-450675393462?w=600&h=450&fit=crop&q=80" alt="Rumpsteak" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1544025162-d76538b2d2d0?w=600&h=450&fit=crop&q=80'" />
+            <div class="dish-card__img-overlay"></div>
+          </div>
+          <div class="dish-card__body">
+            <h3 class="dish-card__name">Rumpsteak</h3>
+            <p class="dish-card__desc">Vom Rost, mit Kräuterbutter, Pommes frites und gemischtem Salat</p>
+            <div class="dish-card__footer">
+              <span class="dish-card__price">ab 18,90 €</span>
+              <span class="dish-card__tag">Hauptspeise</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card fade-up fade-up-delay-4" data-category="getraenke">
+          <div class="dish-card__image">
+            <img class="dish-card__photo" src="https://images.unsplash.com/photo-1608270586351-33a35fd76014?w=600&h=450&fit=crop&q=80" alt="Bier vom Fass" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&h=450&fit=crop&q=80'" />
+            <div class="dish-card__img-overlay"></div>
+          </div>
+          <div class="dish-card__body">
+            <h3 class="dish-card__name">Bier vom Fass</h3>
+            <p class="dish-card__desc">Frisch gezapft — Pils, Weizen und saisonale Bierspezialitäten</p>
+            <div class="dish-card__footer">
+              <span class="dish-card__price">ab 3,50 €</span>
+              <span class="dish-card__tag">Getränk</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="dish-card fade-up fade-up-delay-4" data-category="getraenke">
+          <div class="dish-card__image">
+            <img class="dish-card__photo" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&h=450&fit=crop&q=80" alt="Offene Weine" loading="lazy" onerror="this.style.opacity='0'" />
+            <div class="dish-card__img-overlay"></div>
+          </div>
+          <div class="dish-card__body">
+            <h3 class="dish-card__name">Offene Weine</h3>
+            <p class="dish-card__desc">Ausgewählte Rot- und Weißweine, glasweise oder als Karaffe</p>
+            <div class="dish-card__footer">
+              <span class="dish-card__price">ab 4,50 €</span>
+              <span class="dish-card__tag">Getränk</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- Öffnungszeiten -->
+  <section class="section hours" id="oeffnungszeiten" aria-labelledby="hours-heading">
+    <div class="container">
+      <div class="hours__inner">
+        <div class="hours__header">
+          <div class="label fade-up" style="text-align:center; margin-bottom:var(--space-2)">Wann wir für Sie da sind</div>
+          <h2 class="heading-xl fade-up fade-up-delay-1" id="hours-heading">Öffnungszeiten</h2>
+        </div>
+
+        <div class="hours__grid">
+          <div class="hours__card fade-up">
+            <div class="hours__card-header">Wochentage</div>
+            <div class="hours__row">
+              <span class="hours__day">Montag</span>
+              <span class="hours__closed">Geschlossen</span>
+            </div>
+            <div class="hours__row">
+              <span class="hours__day">Dienstag</span>
+              <span class="hours__time">14:00 – 23:00</span>
+            </div>
+            <div class="hours__row">
+              <span class="hours__day">Mittwoch</span>
+              <span class="hours__time">14:00 – 23:00</span>
+            </div>
+            <div class="hours__row">
+              <span class="hours__day">Donnerstag</span>
+              <span class="hours__time">14:00 – 23:00</span>
+            </div>
+          </div>
+
+          <div class="hours__card fade-up fade-up-delay-1">
+            <div class="hours__card-header">Wochenende</div>
+            <div class="hours__row">
+              <span class="hours__day">Freitag</span>
+              <span class="hours__time">14:00 – 23:45</span>
+            </div>
+            <div class="hours__row">
+              <span class="hours__day">Samstag</span>
+              <span class="hours__time">14:00 – 23:45</span>
+            </div>
+            <div class="hours__row">
+              <span class="hours__day">Sonntag</span>
+              <span class="hours__time">13:00 – 22:30</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-name">Zum Goldenen Stein</div>
+          <p class="footer__brand-desc">
+            Herzlich, deftig und immer eine Runde wert.
+          </p>
+          <div class="footer__socials" aria-label="Social Media">
+            <a href="https://www.facebook.com/61581760383261/" target="_blank" rel="noopener" class="footer__social-btn" aria-label="Facebook">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/wirtshaus_zumgoldenenstein/" target="_blank" rel="noopener" class="footer__social-btn" aria-label="Instagram">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+          </div>
+        </div>
+
+
+        <div style="grid-column: 4">
+          <div class="footer__col-title">Navigation</div>
+          <ul class="footer__links" role="list">
+            <li><a href="#about" class="footer__link">Über uns</a></li>
+            <li><a href="#speisekarte" class="footer__link">Speisekarte</a></li>
+            <li><a href="#oeffnungszeiten" class="footer__link">Öffnungszeiten</a></li>
+          </ul>
+        </div>
+
+        <div style="grid-column: 5">
+          <div class="footer__col-title">Anfahrt &amp; Kontakt</div>
+          <ul class="footer__links" role="list">
+            <li class="footer__link">Wertgasse 38<br>45468 Mülheim an der Ruhr</li>
+            <li><a href="tel:+4915145031359" class="footer__link">+49 1514 5031359</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <div class="footer__copy">&copy; 2025 Zum Goldenen Stein · Mülheim an der Ruhr</div>
+        <nav class="footer__legal" aria-label="Rechtliches">
+          <a href="https://www.zumgoldenenstein.de/impressum" target="_blank" rel="noopener">Impressum</a>
+          <a href="#">Datenschutz</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav')
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 48), { passive: true })
+
+    // Hamburger menu
+    const hamburger = document.getElementById('nav-hamburger')
+    const drawer = document.getElementById('nav-drawer')
+    const backdrop = document.getElementById('nav-drawer-backdrop')
+
+    function openDrawer() {
+      drawer.classList.add('open')
+      hamburger.classList.add('open')
+      hamburger.setAttribute('aria-expanded', 'true')
+      document.body.style.overflow = 'hidden'
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open')
+      hamburger.classList.remove('open')
+      hamburger.setAttribute('aria-expanded', 'false')
+      document.body.style.overflow = ''
+    }
+
+    hamburger.addEventListener('click', () => {
+      drawer.classList.contains('open') ? closeDrawer() : openDrawer()
+    })
+    backdrop.addEventListener('click', closeDrawer)
+    drawer.querySelectorAll('.nav__drawer-link, .nav__drawer-cta a').forEach(link => {
+      link.addEventListener('click', closeDrawer)
+    })
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer() })
+
+    // Fade-up animations
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target) } }),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    )
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el))
+
+    // Menu tabs
+    document.querySelectorAll('.menu__tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.menu__tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false') })
+        tab.classList.add('active'); tab.setAttribute('aria-selected', 'true')
+        const filter = tab.dataset.filter
+        document.querySelectorAll('.dish-card').forEach(card => {
+          const show = filter === 'all' || card.dataset.category === filter
+          card.style.transition = 'opacity 0.25s ease, transform 0.25s ease'
+          card.style.opacity = show ? '1' : '0'
+          card.style.transform = show ? '' : 'scale(0.97)'
+          setTimeout(() => { card.style.display = show ? '' : 'none' }, show ? 0 : 250)
+          if (show) card.style.display = ''
+        })
+      })
+    })
+
+    // Reservation form
+    document.getElementById('reservation-form').addEventListener('submit', e => {
+      e.preventDefault()
+      const btn = e.target.querySelector('.form__submit')
+      btn.innerHTML = 'Anfrage gesendet — wir melden uns bald!'
+      btn.style.cssText = 'background:#1a2a1a; color:#6bcb6b; cursor:default;'
+      btn.disabled = true
+    })
+
+    // Min date
+    document.getElementById('datum').setAttribute('min', new Date().toISOString().split('T')[0])
+  </script>
+</body>
+</html>
