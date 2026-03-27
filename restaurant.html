@@ -95,7 +95,7 @@
 
     /* ─── Tel-Links auf Desktop deaktivieren ── */
     @media (min-width: 769px) {
-      a[href^="tel"] { pointer-events: none; cursor: default; }
+      a[href^="tel"] { cursor: default; }
     }
 
     /* ─── Buttons ─────────────────────────── */
@@ -1110,6 +1110,11 @@
       btn.innerHTML = 'Anfrage gesendet — wir melden uns bald!'
       btn.style.cssText = 'background:#1a2a1a; color:#6bcb6b; cursor:default;'
       btn.disabled = true
+    })
+
+    // Disable tel links on desktop
+    document.querySelectorAll('a[href^="tel"]').forEach(link => {
+      link.addEventListener('click', e => { if (window.innerWidth >= 769) e.preventDefault() })
     })
 
     // Min date
