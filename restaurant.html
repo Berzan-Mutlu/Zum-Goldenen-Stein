@@ -1113,9 +1113,12 @@
     })
 
     // Disable tel links on desktop
-    document.querySelectorAll('a[href^="tel"]').forEach(link => {
-      link.addEventListener('click', e => { if (window.innerWidth >= 769) e.preventDefault() })
-    })
+    if (window.innerWidth >= 769) {
+      document.querySelectorAll('a[href^="tel"]').forEach(link => {
+        link.dataset.tel = link.href
+        link.removeAttribute('href')
+      })
+    }
 
     // Min date
     document.getElementById('datum').setAttribute('min', new Date().toISOString().split('T')[0])
