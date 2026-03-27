@@ -1112,11 +1112,14 @@
       btn.disabled = true
     })
 
-    // Disable tel links on desktop
+    // Replace tel links with spans on desktop
     if (window.innerWidth >= 769) {
       document.querySelectorAll('a[href^="tel"]').forEach(link => {
-        link.dataset.tel = link.href
-        link.removeAttribute('href')
+        const span = document.createElement('span')
+        span.className = link.className
+        span.setAttribute('style', link.getAttribute('style') || '')
+        span.innerHTML = link.innerHTML
+        link.parentNode.replaceChild(span, link)
       })
     }
 
