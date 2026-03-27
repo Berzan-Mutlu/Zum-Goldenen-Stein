@@ -677,10 +677,10 @@
         </ul>
 
         <div class="nav__actions">
-          <a href="tel:+4915145031359" class="btn btn-ghost" aria-label="Anrufen">
+          <span class="btn btn-ghost tel-display" data-tel="+4915145031359">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11.5a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.77a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             +49 1514 5031359
-          </a>
+          </span>
           <button class="nav__hamburger" id="nav-hamburger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-drawer">
             <span class="nav__hamburger-line"></span>
             <span class="nav__hamburger-line"></span>
@@ -770,7 +770,7 @@
           <div class="hero__info-item">
             <div class="hero__info-text">
               <strong>Reservierung</strong>
-              <a href="tel:+4915145031359" style="color:#ffffff;">+49 1514 5031359</a>
+              <span class="tel-display" data-tel="+4915145031359">+49 1514 5031359</span>
             </div>
           </div>
         </div>
@@ -1035,7 +1035,7 @@
           <div class="footer__col-title">Anfahrt &amp; Kontakt</div>
           <ul class="footer__links" role="list">
             <li class="footer__link">Wertgasse 38<br>45468 Mülheim an der Ruhr</li>
-            <li><a href="tel:+4915145031359" class="footer__link">+49 1514 5031359</a></li>
+            <li><span class="footer__link tel-display" data-tel="+4915145031359">+49 1514 5031359</span></li>
           </ul>
         </div>
       </div>
@@ -1115,15 +1115,6 @@
       btn.disabled = true
     })
 
-    // Replace tel links with spans on desktop
-    if (window.innerWidth >= 769) {
-      document.querySelectorAll('a[href^="tel"]').forEach(link => {
-        const span = document.createElement('span')
-        span.className = link.className + ' tel-display'
-        span.innerHTML = link.innerHTML
-        link.parentNode.replaceChild(span, link)
-      })
-    }
 
     // Min date
     document.getElementById('datum').setAttribute('min', new Date().toISOString().split('T')[0])
