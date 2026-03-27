@@ -93,6 +93,11 @@
       line-height: 1.15;
     }
 
+    /* ─── Tel-Links auf Desktop deaktivieren ── */
+    @media (min-width: 769px) {
+      a[href^="tel"] { pointer-events: none; cursor: default; }
+    }
+
     /* ─── Buttons ─────────────────────────── */
     .btn {
       display: inline-flex; align-items: center; gap: var(--space-2);
