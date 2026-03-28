@@ -106,15 +106,15 @@
     display: contents;
   }
 
-  /* 1) Brand-Name – direkt am oberen Rand, kein Abstand nach unten */
+  /* 1) Brand-Name – direkt über dem Beschreibungstext */
   .footer__brand-name {
     order: 0;
     width: 100%;
     white-space: nowrap;
-    margin-bottom: var(--space-2);
+    margin-bottom: var(--space-1);
   }
 
-  /* 2) Beschreibungstext – knapp unter Brand-Name, großer Abstand nach unten zu den Spalten */
+  /* 2) Beschreibungstext – direkt unter Brand-Name, Abstand zu den Spalten */
   .footer__brand-desc {
     order: 1;
     width: 100%;
@@ -122,18 +122,20 @@
     margin-bottom: var(--space-6);
   }
 
-  /* 3) Navigation und Anfahrt nebeneinander */
+  /* 3) Navigation und Anfahrt nebeneinander, oben bündig ausgerichtet */
   .footer__top > div:nth-child(2),
   .footer__top > div:nth-child(3) {
     order: 2;
     flex: 1 1 calc(50% - var(--space-3));
     min-width: 0;
+    align-self: flex-start;
   }
 
-  /* 4) Social-Media-Badges unten, kein extra Abstand nach unten */
+  /* 4) Social-Media-Badges – mehr Abstand nach oben (zu Öffnungszeiten) */
   .footer__socials {
     order: 3;
     width: 100%;
+    margin-top: var(--space-6);
     margin-bottom: 0;
   }
 
