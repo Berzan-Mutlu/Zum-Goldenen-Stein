@@ -89,15 +89,15 @@
    * von .footer__top werden und per order umsortiert werden können.
    */
 
-  /* Footer Innenabstand reduzieren */
+  /* Footer Innenabstand oben stark reduzieren */
   .footer {
-    padding-block: var(--space-6) var(--space-5);
+    padding-block: var(--space-4) var(--space-5);
   }
 
   .footer__top {
     display: flex !important;
     flex-wrap: wrap;
-    gap: var(--space-3) var(--space-3);
+    gap: 0;
     margin-bottom: var(--space-5);
   }
 
@@ -106,20 +106,20 @@
     display: contents;
   }
 
-  /* 1) Brand-Name */
+  /* 1) Brand-Name – direkt am oberen Rand, kein Abstand nach unten */
   .footer__brand-name {
     order: 0;
     width: 100%;
     white-space: nowrap;
-    margin-bottom: 0;
+    margin-bottom: var(--space-2);
   }
 
-  /* 2) Beschreibungstext */
+  /* 2) Beschreibungstext – knapp unter Brand-Name, großer Abstand nach unten zu den Spalten */
   .footer__brand-desc {
     order: 1;
     width: 100%;
     white-space: normal !important;
-    margin-bottom: 0;
+    margin-bottom: var(--space-6);
   }
 
   /* 3) Navigation und Anfahrt nebeneinander */
