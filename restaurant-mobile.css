@@ -112,7 +112,7 @@
     width: 100%;
     white-space: nowrap;
     line-height: 1;
-    margin-bottom: 3px;
+    margin-bottom: 0;
   }
 
   /* 2) Beschreibungstext – wie Tagline im Header: direkt drunter */
