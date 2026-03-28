@@ -20,10 +20,15 @@
     white-space: normal !important;
   }
 
+  /* "Zum Goldenen Stein" Titel im Hero ausblenden */
+  .hero__title {
+    display: none;
+  }
+
   /* Weniger Abstand oben, da Nav auf Mobile kleiner wirkt */
   .hero__content {
     padding-top: 80px;
-    padding-bottom: 200px; /* Platz für die Info-Strip */
+    padding-bottom: 200px;
   }
 
   /* CTA-Buttons auf Mobile untereinander & volle Breite */
