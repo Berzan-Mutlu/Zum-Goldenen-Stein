@@ -125,11 +125,18 @@
     margin-bottom: 34px;
   }
 
-  /* 3) Navigation und Anfahrt nebeneinander, oben bündig ausgerichtet */
-  .footer__top > div:nth-child(2),
+  /* 3a) Navigation – schmalere Spalte */
+  .footer__top > div:nth-child(2) {
+    order: 2;
+    flex: 0 0 40%;
+    min-width: 0;
+    align-self: flex-start;
+  }
+
+  /* 3b) Anfahrt – breitere Spalte, damit Adresse passt */
   .footer__top > div:nth-child(3) {
     order: 2;
-    flex: 1 1 calc(50% - var(--space-3));
+    flex: 0 0 55%;
     min-width: 0;
     align-self: flex-start;
   }
