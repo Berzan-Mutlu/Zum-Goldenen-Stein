@@ -89,10 +89,16 @@
    * von .footer__top werden und per order umsortiert werden können.
    */
 
+  /* Footer Innenabstand reduzieren */
+  .footer {
+    padding-block: var(--space-6) var(--space-5);
+  }
+
   .footer__top {
     display: flex !important;
     flex-wrap: wrap;
-    gap: var(--space-4) var(--space-3);
+    gap: var(--space-3) var(--space-3);
+    margin-bottom: var(--space-5);
   }
 
   /* Brand-Wrapper auflösen → Kinder werden direkte Flex-Items */
@@ -124,16 +130,19 @@
     min-width: 0;
   }
 
-  /* 4) Social-Media-Badges unten */
+  /* 4) Social-Media-Badges unten, kein extra Abstand nach unten */
   .footer__socials {
     order: 3;
     width: 100%;
+    margin-bottom: 0;
   }
 
-  /* Copyright und Legal untereinander */
+  /* Trennlinie + Copyright-Bereich: engerer Abstand */
   .footer__bottom {
     flex-direction: column;
     align-items: flex-start;
+    padding-top: var(--space-4);
+    gap: var(--space-2);
   }
 
   /* ─── Reservierungsformular ────────────────────────────────── */
