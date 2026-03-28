@@ -106,19 +106,22 @@
     display: contents;
   }
 
-  /* 1) Brand-Name – direkt über dem Beschreibungstext */
+  /* 1) Brand-Name – wie im Header: kein Abstand nach unten, line-height eng */
   .footer__brand-name {
     order: 0;
     width: 100%;
     white-space: nowrap;
-    margin-bottom: 0;
+    line-height: 1;
+    margin-bottom: 3px;
   }
 
-  /* 2) Beschreibungstext – direkt unter Brand-Name, Abstand zu den Spalten */
+  /* 2) Beschreibungstext – wie Tagline im Header: direkt drunter */
   .footer__brand-desc {
     order: 1;
     width: 100%;
     white-space: normal !important;
+    line-height: 1.4;
+    margin-top: 0;
     margin-bottom: var(--space-6);
   }
 
