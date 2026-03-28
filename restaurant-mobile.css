@@ -111,7 +111,7 @@
     order: 0;
     width: 100%;
     white-space: nowrap;
-    margin-bottom: var(--space-1);
+    margin-bottom: 0;
   }
 
   /* 2) Beschreibungstext – direkt unter Brand-Name, Abstand zu den Spalten */
