@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
   <style>
     :root {
       --bg-base:      #0b0a08;
@@ -42,6 +41,7 @@
       scroll-behavior: smooth;
       scrollbar-width: thin;
       scrollbar-color: var(--gold) var(--bg-base);
+      overflow-x: hidden;
     }
 
     body {
@@ -99,6 +99,8 @@
       a[href^="tel"] { cursor: default; }
       .tel-display { transition: color 250ms ease; cursor: text; }
       .tel-display:hover { color: var(--gold) !important; }
+      .hero__info-text .tel-display { transition: none; color: inherit; }
+      .hero__info-text .tel-display:hover { color: inherit !important; }
     }
 
     /* ─── Buttons ─────────────────────────── */
@@ -657,6 +659,7 @@
     :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: var(--radius-sm); }
     ::selection { background: rgba(201,160,64,0.2); color: #ffffff; }
   </style>
+  <link rel="stylesheet" href="restaurant-mobile.css" />
 </head>
 
 <body>

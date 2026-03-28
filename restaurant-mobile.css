@@ -1,0 +1,99 @@
+/* ============================================================
+   RESTAURANT MOBILE OVERRIDES
+   Greift ausschließlich auf Bildschirmen ≤ 768px
+   Desktop bleibt komplett unverändert.
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  /* ─── Navigation ──────────────────────────────────────────── */
+
+  /* Telefonnummer in der Nav ausblenden – Hamburger reicht */
+  .nav__actions .tel-display {
+    display: none;
+  }
+
+  /* ─── Hero ────────────────────────────────────────────────── */
+
+  /* nowrap entfernen – sonst läuft der Titel über den Rand */
+  .hero__title {
+    white-space: normal !important;
+  }
+
+  /* Weniger Abstand oben, da Nav auf Mobile kleiner wirkt */
+  .hero__content {
+    padding-top: 80px;
+    padding-bottom: 200px; /* Platz für die Info-Strip */
+  }
+
+  /* CTA-Buttons auf Mobile untereinander & volle Breite */
+  .hero__cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero__cta .btn {
+    justify-content: center;
+  }
+
+  /* ─── Über uns ────────────────────────────────────────────── */
+
+  /* Padding-right entfernt, das auf Mobile leer wäre */
+  .about__visual {
+    padding-right: 0;
+  }
+
+  /* Float-Badge: absolut positioniert geht auf Mobile schief */
+  .about__float-badge {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: var(--space-5);
+    align-self: flex-start;
+  }
+
+  /* ─── Speisekarte ─────────────────────────────────────────── */
+
+  /* Tab-Reihe scrollbar statt umbrechen */
+  .menu__tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding-bottom: var(--space-2);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .menu__tabs::-webkit-scrollbar { display: none; }
+
+  .menu__tab {
+    flex-shrink: 0;
+  }
+
+  /* ─── Features ────────────────────────────────────────────── */
+
+  /* Weniger inneres Padding auf kleinen Screens */
+  .feat-card {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  /* ─── Footer ──────────────────────────────────────────────── */
+
+  /* Brand-Desc und Brand-Name umbrechen erlauben */
+  .footer__brand-name,
+  .footer__brand-desc {
+    white-space: normal !important;
+  }
+
+  /* Copyright und Legal untereinander */
+  .footer__bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* ─── Reservierungsformular ────────────────────────────────── */
+
+  /* Submit-Button Mindesthöhe für bessere Touch-Target */
+  .form__submit {
+    min-height: 52px;
+  }
+
+}
