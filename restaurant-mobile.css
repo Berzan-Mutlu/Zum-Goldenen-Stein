@@ -139,6 +139,10 @@
     align-self: flex-start;
   }
 
+  /* Adresse etwas kleiner damit 45468 Mülheim an der Ruhr nicht umbricht */
+  .footer__top > div:nth-child(3) .footer__link {
+    font-size: 0.8rem;
+  }
 
   /* 4) Social-Media-Badges – mehr Abstand nach oben (zu Öffnungszeiten) */
   .footer__socials {
