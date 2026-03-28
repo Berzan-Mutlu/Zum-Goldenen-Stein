@@ -134,10 +134,6 @@
     align-self: flex-start;
   }
 
-  /* Adresse kleiner damit sie nicht umbricht */
-  .footer__top > div:nth-child(3) .footer__link {
-    font-size: 0.75rem;
-  }
 
   /* 4) Social-Media-Badges – mehr Abstand nach oben (zu Öffnungszeiten) */
   .footer__socials {
