@@ -22,7 +22,7 @@
 
   /* "Zum Goldenen Stein" Titel im Hero ausblenden */
   .hero__title {
-    display: none;
+    display: none !important;
   }
 
   /* Weniger Abstand oben, da Nav auf Mobile kleiner wirkt */
